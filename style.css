@@ -80,7 +80,8 @@ nav a {
 }
 
 footer {
-  padding: 80px 0 40px;
+  padding: 20px 0 10px;
   color: #777;
   font-size: 14px;
+  text-align: right;
 }
