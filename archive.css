@@ -79,4 +79,24 @@ body {
   object-fit: cover;
   object-position: top;
   display: block;
+  cursor: pointer;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(245, 241, 234, 0.96);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.lightbox img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  box-shadow: 0 0 30px rgba(0,0,0,0.08);
 }
