@@ -9,12 +9,22 @@
 
 <body>
 
-  <div class="archive-controls">
-    <button onclick="showTeacherView()">By Teacher</button>
-    <button onclick="showTimelineView()">By Time</button>
+  <div class="top-bar">
+
+    <div class="archive-controls">
+      <button onclick="showTeacherView()">By Teacher</button>
+      <button onclick="showTimelineView()">By Time</button>
+    </div>
+
+    <a class="return-link" href="index.html">Main Page</a>
+
   </div>
 
   <main id="archive"></main>
+
+  <div class="bottom-bar">
+    <a class="return-link" href="index.html">Main Page</a>
+  </div>
 
   <script>
     const artworks = [
@@ -68,11 +78,13 @@
     }
 
     function renderGrouped(groupKey) {
+
       archive.innerHTML = "";
 
       const groups = {};
 
       artworks.forEach(function(art) {
+
         const groupName = art[groupKey];
 
         if (!groups[groupName]) {
@@ -91,6 +103,7 @@
       }
 
       groupNames.forEach(function(groupName) {
+
         const section = document.createElement("section");
         section.className = "archive-section";
 
@@ -108,14 +121,18 @@
         grid.className = "archive-grid";
 
         groups[groupName].forEach(function(art) {
+
           const img = document.createElement("img");
+
           img.src = art.src;
           img.alt = "";
+
           grid.appendChild(img);
         });
 
         section.appendChild(grid);
         archive.appendChild(section);
+
       });
     }
 
@@ -128,6 +145,7 @@
     }
 
     showTeacherView();
+
   </script>
 
 </body>
