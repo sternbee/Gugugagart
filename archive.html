@@ -11,8 +11,8 @@
 
   <div class="top-bar">
     <div class="archive-controls">
-      <button onclick="showTeacherView()">By Teacher</button>
       <button onclick="showTimelineView()">By Time</button>
+      <button onclick="showTeacherView()">By Teacher</button>
     </div>
 
     <a class="return-link" href="index.html">Main Page</a>
@@ -100,7 +100,11 @@
       if (groupKey === "date") {
         groupNames.sort().reverse();
       } else {
-        groupNames.sort();
+        groupNames.sort(function(a, b) {
+          if (a === "Yulia Chzhou") return -1;
+          if (b === "Yulia Chzhou") return 1;
+          return a.localeCompare(b);
+        });
       }
 
       groupNames.forEach(function(groupName) {
@@ -137,6 +141,14 @@
       });
     }
 
+    function showTimelineView() {
+      renderGrouped("date");
+    }
+
+    function showTeacherView() {
+      renderGrouped("teacher");
+    }
+
     function openLightbox(src) {
       document.getElementById("lightbox-image").src = src;
       document.getElementById("lightbox").classList.add("open");
@@ -147,15 +159,7 @@
       document.getElementById("lightbox-image").src = "";
     }
 
-    showTeacherView();
-
-    function showTeacherView() {
-      renderGrouped("teacher");
-    }
-
-    function showTimelineView() {
-      renderGrouped("date");
-    }
+    showTimelineView();
   </script>
 
 </body>
