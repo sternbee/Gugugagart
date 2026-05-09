@@ -9,17 +9,102 @@
 
 <body>
 
-  <div class="archive-grid">
-
-    <img src="images/WhereHomeIs2026.jpg" alt="">
-    <img src="images/ExtinguishedHope2025.jpeg" alt="">
-    <img src="images/StillLifeStudy2025.jpeg" alt="">
-    <img src="images/RoseStudy2026.jpeg" alt="">
-    <img src="images/SunflowersStudy2025.jpeg" alt="">
-    <img src="images/SunflowersStudy22025.jpg" alt="">
-    <img src="images/PumpkinStudy2025.jpeg" alt="">
-
+  <div class="archive-controls">
+    <button onclick="showTeacherView()">By Teacher</button>
+    <button onclick="showTimelineView()">By Time</button>
   </div>
+
+  <main id="archive"></main>
+
+  <script>
+    const artworks = [
+      {
+        src: "images/WhereHomeIs2026.jpg",
+        teacher: "Julia",
+        year: "2026"
+      },
+      {
+        src: "images/ExtinguishedHope2025.jpeg",
+        teacher: "Julia",
+        year: "2025"
+      },
+      {
+        src: "images/StillLifeStudy2025.jpeg",
+        teacher: "Julia",
+        year: "2025"
+      },
+      {
+        src: "images/RoseStudy2026.jpeg",
+        teacher: "Julia",
+        year: "2026"
+      },
+      {
+        src: "images/SunflowersStudy2025.jpeg",
+        teacher: "Julia",
+        year: "2025"
+      },
+      {
+        src: "images/SunflowersStudy22025.jpg",
+        teacher: "Toropygin",
+        year: "2025"
+      },
+      {
+        src: "images/PumpkinStudy2025.jpeg",
+        teacher: "Julia",
+        year: "2025"
+      }
+    ];
+
+    const archive = document.getElementById("archive");
+
+    function renderGrouped(groupKey) {
+      archive.innerHTML = "";
+
+      const groups = {};
+
+      artworks.forEach(function(art) {
+        const groupName = art[groupKey];
+
+        if (!groups[groupName]) {
+          groups[groupName] = [];
+        }
+
+        groups[groupName].push(art);
+      });
+
+      Object.keys(groups).forEach(function(groupName) {
+        const section = document.createElement("section");
+        section.className = "archive-section";
+
+        const heading = document.createElement("h2");
+        heading.textContent = groupName;
+        section.appendChild(heading);
+
+        const grid = document.createElement("div");
+        grid.className = "archive-grid";
+
+        groups[groupName].forEach(function(art) {
+          const img = document.createElement("img");
+          img.src = art.src;
+          img.alt = "";
+          grid.appendChild(img);
+        });
+
+        section.appendChild(grid);
+        archive.appendChild(section);
+      });
+    }
+
+    function showTeacherView() {
+      renderGrouped("teacher");
+    }
+
+    function showTimelineView() {
+      renderGrouped("year");
+    }
+
+    showTeacherView();
+  </script>
 
 </body>
 </html>
