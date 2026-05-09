@@ -124,6 +124,10 @@
         const grid = document.createElement("div");
         grid.className = "archive-grid";
 
+        groups[groupName].sort(function(a, b) {
+          return b.date.localeCompare(a.date);
+        });
+
         groups[groupName].forEach(function(art) {
           const img = document.createElement("img");
           img.src = art.src;
