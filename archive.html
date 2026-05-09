@@ -10,14 +10,12 @@
 <body>
 
   <div class="top-bar">
-
     <div class="archive-controls">
       <button onclick="showTeacherView()">By Teacher</button>
       <button onclick="showTimelineView()">By Time</button>
     </div>
 
     <a class="return-link" href="index.html">Main Page</a>
-
   </div>
 
   <main id="archive"></main>
@@ -27,80 +25,67 @@
   </div>
 
   <div id="lightbox" class="lightbox">
+    <button class="close-button" onclick="closeLightbox()">×</button>
     <img id="lightbox-image" src="" alt="">
   </div>
 
   <script>
-
     const artworks = [
-
       {
         src: "images/WhereHomeIs2026.jpg",
         teacher: "Yulia Chzhou",
         date: "2026-04"
       },
-
       {
         src: "images/ExtinguishedHope2025.jpeg",
         teacher: "Yulia Chzhou",
         date: "2025-04"
       },
-
       {
         src: "images/StillLifeStudy2025.jpeg",
         teacher: "Yulia Chzhou",
         date: "2025-04"
       },
-
       {
         src: "images/RoseStudy2026.jpeg",
         teacher: "Yulia Chzhou",
         date: "2026-03"
       },
-
       {
         src: "images/SunflowersStudy2025.jpeg",
         teacher: "Yulia Chzhou",
         date: "2025-03"
       },
-
       {
         src: "images/SunflowersStudy22025.jpg",
         teacher: "Toropygin",
         date: "2025-03"
       },
-
       {
         src: "images/PumpkinStudy2025.jpeg",
         teacher: "Yulia Chzhou",
         date: "2025-02"
       }
-
     ];
 
     const archive = document.getElementById("archive");
 
     function formatMonth(dateString) {
-
       const [year, month] = dateString.split("-");
-
       const date = new Date(year, month - 1);
 
       return date.toLocaleString("en-US", {
         month: "long",
         year: "numeric"
       });
-
     }
 
     function renderGrouped(groupKey) {
-
       archive.innerHTML = "";
 
       const groups = {};
 
       artworks.forEach(function(art) {
-
         const groupName = art[groupKey];
 
         if (!groups[groupName]) {
@@ -108,7 +93,6 @@
         }
 
         groups[groupName].push(art);
-
       });
 
       let groupNames = Object.keys(groups);
@@ -120,9 +104,7 @@
       }
 
       groupNames.forEach(function(groupName) {
-
         const section = document.createElement("section");
-
         section.className = "archive-section";
 
         const heading = document.createElement("h2");
@@ -136,41 +118,36 @@
         section.appendChild(heading);
 
         const grid = document.createElement("div");
-
         grid.className = "archive-grid";
 
         groups[groupName].forEach(function(art) {
-
           const img = document.createElement("img");
-
           img.src = art.src;
           img.alt = "";
 
           img.onclick = function() {
-
-            const lightbox =
-              document.getElementById("lightbox");
-
-            const lightboxImage =
-              document.getElementById("lightbox-image");
-
-            lightboxImage.src = art.src;
-
-            lightbox.style.display = "flex";
-
+            openLightbox(art.src);
           };
 
           grid.appendChild(img);
-
         });
 
         section.appendChild(grid);
-
         archive.appendChild(section);
-
       });
-
     }
+
+    function openLightbox(src) {
+      document.getElementById("lightbox-image").src = src;
+      document.getElementById("lightbox").classList.add("open");
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("open");
+      document.getElementById("lightbox-image").src = "";
+    }
+
+    showTeacherView();
 
     function showTeacherView() {
       renderGrouped("teacher");
@@ -179,16 +156,6 @@
     function showTimelineView() {
       renderGrouped("date");
     }
-
-    document.getElementById("lightbox").onclick =
-      function() {
-
-        this.style.display = "none";
-
-      };
-
-    showTeacherView();
-
   </script>
 
 </body>
