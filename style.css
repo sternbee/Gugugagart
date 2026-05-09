@@ -22,7 +22,7 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.55em;
   text-transform: uppercase;
 }
@@ -91,36 +91,52 @@ nav a {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 34px 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 42px 28px;
+}
+
+.gallery article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .gallery img {
   width: 100%;
-  hight: auto;
+  height: auto;
+  max-height: 380px;
+  object-fit: contain;
   display: block;
 }
 
 .gallery h3 {
-  margin: 12px 0 4px;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.3em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .gallery p {
   margin: 0;
   font-size: 14px;
   color: #555;
+  text-align: center;
+}
+
+.info-section {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 40px 52px 0;
 }
 
 .about,
 .contact {
   max-width: 700px;
-  margin: 80px auto 0;
-  padding: 0 52px;
+  margin-top: 80px;
 }
 
 .about h2,
@@ -142,6 +158,26 @@ a {
   color: inherit;
 }
 
+.archive-link {
+  max-width: 1500px;
+  margin: 0px auto 0;
+  padding: 0 52px;
+}
+
+.archive-link a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #e9e5e1 ;
+  transition: color 0.2s ease;
+}
+
+.archive-link a:hover {
+  color: #777;
+}
+
 footer {
   max-width: 1500px;
   margin: 0 auto;
@@ -154,12 +190,14 @@ footer {
 }
 
 @media (max-width: 1000px) {
+
   .gallery {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 700px) {
+
   .site-header {
     padding: 28px 24px 60px;
     display: block;
@@ -180,8 +218,8 @@ footer {
 
   .hero,
   .work,
-  .about,
-  .contact,
+  .info-section,
+  .archive-link,
   footer {
     padding-left: 24px;
     padding-right: 24px;
@@ -196,4 +234,9 @@ footer {
   .gallery {
     grid-template-columns: 1fr;
   }
+
+  .gallery img {
+    max-height: none;
+  }
+
 }
