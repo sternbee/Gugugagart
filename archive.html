@@ -21,41 +21,51 @@
       {
         src: "images/WhereHomeIs2026.jpg",
         teacher: "Julia",
-        year: "2026"
+        date: "2026-01"
       },
       {
         src: "images/ExtinguishedHope2025.jpeg",
-        teacher: "Julia",
-        year: "2025"
+        teacher: "Toropygin",
+        date: "2025-11"
       },
       {
         src: "images/StillLifeStudy2025.jpeg",
-        teacher: "Julia",
-        year: "2025"
+        teacher: "Toropygin",
+        date: "2025-10"
       },
       {
         src: "images/RoseStudy2026.jpeg",
         teacher: "Julia",
-        year: "2026"
+        date: "2026-03"
       },
       {
         src: "images/SunflowersStudy2025.jpeg",
         teacher: "Julia",
-        year: "2025"
+        date: "2025-09"
       },
       {
         src: "images/SunflowersStudy22025.jpg",
         teacher: "Toropygin",
-        year: "2025"
+        date: "2025-08"
       },
       {
         src: "images/PumpkinStudy2025.jpeg",
         teacher: "Julia",
-        year: "2025"
+        date: "2025-10"
       }
     ];
 
     const archive = document.getElementById("archive");
+
+    function formatMonth(dateString) {
+      const [year, month] = dateString.split("-");
+      const date = new Date(year, month - 1);
+
+      return date.toLocaleString("en-US", {
+        month: "long",
+        year: "numeric"
+      });
+    }
 
     function renderGrouped(groupKey) {
       archive.innerHTML = "";
@@ -72,12 +82,26 @@
         groups[groupName].push(art);
       });
 
-      Object.keys(groups).forEach(function(groupName) {
+      let groupNames = Object.keys(groups);
+
+      if (groupKey === "date") {
+        groupNames.sort().reverse();
+      } else {
+        groupNames.sort();
+      }
+
+      groupNames.forEach(function(groupName) {
         const section = document.createElement("section");
         section.className = "archive-section";
 
         const heading = document.createElement("h2");
-        heading.textContent = groupName;
+
+        if (groupKey === "date") {
+          heading.textContent = formatMonth(groupName);
+        } else {
+          heading.textContent = groupName;
+        }
+
         section.appendChild(heading);
 
         const grid = document.createElement("div");
@@ -100,7 +124,7 @@
     }
 
     function showTimelineView() {
-      renderGrouped("year");
+      renderGrouped("date");
     }
 
     showTeacherView();
